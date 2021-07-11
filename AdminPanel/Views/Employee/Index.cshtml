@@ -1,0 +1,86 @@
+﻿
+@model AdminPanel.paganation.PagingList< admin.Models.Employee>
+@{
+    ViewData["Title"] = "Employees";
+}
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <!-- /.card -->
+                <div class="card-body">
+
+                    @using (Html.BeginForm())
+                    {
+                        <p class="text-center">
+                            @Html.TextBox("SearchString")
+                            @*<input type="submit" value="Search" />*@
+                            <button type="submit" class="btn btn-light">Search</button>
+                        </p>
+                    }
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>Employee Name</th>
+                                <th>Employee Email</th>
+                                <th>Employee's Company</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.EmployeeName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.EmployeeEmail)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Company.CompanyName)
+                                    </td>
+
+                                </tr>
+                            }
+                        </tbody>
+
+                    </table>
+                    @*pagination*@
+                    <br />
+
+                    @{
+                        var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+                        var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+                        var totalPageNo = Model.TotalPageNo;
+                        var currentPageNo = Model.PageIndex;
+                    @*  *@}
+                <div class="text-center">
+                    <span >
+                        Page No : @currentPageNo of @totalPageNo
+                    </span>
+                   
+                    <a asp-action="Index"
+                       asp-route-pageNo="@(Model.PageIndex - 1)"
+                       class="btn btn-default @prevDisabled">
+                        Previous
+                    </a>
+                    <a asp-action="Index"
+                       asp-route-pageNo="@(Model.PageIndex + 1)"
+                       class="btn btn-default @nextDisabled">
+                        Next
+                    </a>
+                </div>
+
+                </div>
+                <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+    <!-- /.container-fluid -->
+</section>
+
+

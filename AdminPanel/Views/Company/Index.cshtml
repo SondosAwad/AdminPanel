@@ -1,0 +1,53 @@
+﻿@model IEnumerable<admin.Models.Company>
+
+@{
+    ViewData["Title"] = "Companies";
+}
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <!-- /.card -->
+                <div class="card-body">
+               
+                    <table id="example1"
+                           class="table table-bordered table-striped ">
+                        <thead>
+                            <tr>
+                                <th>Company Name</th>
+                                <th>Company Website</th>
+                                <th>Company Address</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.CompanyName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.CompanyWebsite)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.CompAddress)
+                                    </td>
+
+                                </tr>
+                            }
+                        </tbody>
+
+                    </table>
+                </div>
+                <!-- /.card-body -->
+            </div>
+                <!-- /.card -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+ 
+    <!-- /.container-fluid -->
+</section>
+
